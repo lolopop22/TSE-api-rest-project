@@ -43,11 +43,11 @@ public class LoadDatabases {
 		;
 		
 		return args -> {
-			log.info("Preloading " + playerRepository.saveAll(Arrays.asList(player1, player2, player3, player4, player5)));
+			//log.info("Preloading " + playerRepository.saveAll(Arrays.asList(player1, player2, player3, player4, player5)));
 			log.info("Preloading " + teamRepository.save(psg));
 			log.info("Preloading " + teamRepository.save(brazilNationalTeam));
 			log.info("Preloading " + teamRepository.save(argNationalTeam));
-			//log.info("Preloading " + playerRepository.saveAll(Arrays.asList(player1, player2, player3, player4, player5)));
+			log.info("Preloading " + playerRepository.saveAll(Arrays.asList(player1, player2, player3, player4, player5)));
 
 		};
 	}
