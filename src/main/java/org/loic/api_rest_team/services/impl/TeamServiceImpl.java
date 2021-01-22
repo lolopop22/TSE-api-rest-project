@@ -1,9 +1,11 @@
 package org.loic.api_rest_team.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.loic.api_rest_team.dao.PlayerRepository;
 import org.loic.api_rest_team.dao.TeamRepository;
+import org.loic.api_rest_team.domains.Player;
 import org.loic.api_rest_team.domains.PlayerTeam;
 import org.loic.api_rest_team.domains.Team;
 import org.loic.api_rest_team.exceptions.TeamNotFoundException;
@@ -39,26 +41,21 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public Team createTeam(Team team) {
 		
-		/*Team foundTeam = this.teamRepository.findById(id).orElse(null);
+		List<PlayerTeam> newPlayers = new ArrayList<>();
 		
-		if(newTeam != null) {
-			foundTeam.setName(newTeam.getName());
-			foundTeam.setCountry(newTeam.getCountry());
-			foundTeam.setType(newTeam.getType());
-			foundTeam.setCaptain(newTeam.getCaptain());
-			if(newT)
-		}*/
-		
-		//Enregistrer les joueurs de l'équipe avant d'enregistrer l'équipe? 
-			//ça ne marche pas. A moins que je m'y prend mal...
-		
-		/*if(team.getPlayers() != null) {
+		if(team.getPlayers() != null) {
 			for(PlayerTeam player : team.getPlayers()) {
-				this.playerRepository.save(player.getPlayer());
+				Player player_ = player.getPlayer();
+				Player newPlayer = new Player(player_.getName(), player_.getAge(), player_.getCitizenship());
+				PlayerTeam newPlayerteam = new PlayerTeam(newPlayer, player.getPostion());
+				newPlayers.add(newPlayerteam);
+				this.playerRepository.save(newPlayer);
 			}
-		}*/
+		}
 		
-		return this.teamRepository.save(team);
+		Team newTeam = new Team(team.getName(), team.getCountry(), team.getType(), team.getCaptain(), newPlayers);
+		
+		return this.teamRepository.save(newTeam);
 	}
 
 	@Override

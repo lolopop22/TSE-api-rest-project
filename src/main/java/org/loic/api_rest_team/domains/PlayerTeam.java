@@ -37,9 +37,9 @@ public class PlayerTeam {
 	@JsonIgnoreProperties("teams")
 	Player player;
 	
-	//@ManyToOne(fetch = FetchType.LAZY)
+	//@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@MapsId("teamId")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
 	@JsonIgnoreProperties("players")
 	Team team;
@@ -51,7 +51,8 @@ public class PlayerTeam {
 	}
 	
 	public PlayerTeam(Player player, String position){
-		this.player = player;
+		//this.player = player;
+		player.addTeam(this);
 		this.postion = position;
 	}
 	

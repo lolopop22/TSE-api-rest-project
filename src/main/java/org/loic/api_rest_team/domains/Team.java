@@ -40,14 +40,13 @@ public class Team {
 	
 	private String captain;
 	
+	//@OneToMany(cascade = CascadeType.ALL)
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@JsonIgnoreProperties("team")
-//	@OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
 	private List<PlayerTeam> players = new ArrayList<>();
-	//private Set<PlayerTeam> players ;
-	
+		
 	public Team(){
 		
 	}
@@ -57,7 +56,7 @@ public class Team {
 		player.setTeam(this);
 	}
 	
-	public Team(String name, String country, String type, String captain, PlayerTeam... players){
+	public Team(String name, String country, String type, String captain, List<PlayerTeam> players){
 		this.name = name;
 		this.country = country;
 		this.type = type;

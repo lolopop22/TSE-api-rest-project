@@ -27,6 +27,20 @@ public class LoadDatabases {
 		Player player5 = new Player("Lionel Messi", 33, "Argentine");
 		
 		Team psg = new Team("Paris Saint Germain", "Fance", "Club", "Marquinhos",
+								Arrays.asList(  new PlayerTeam(player1, "Ailier gauche"),
+												new PlayerTeam(player2, "Ailier droit"),
+												new PlayerTeam(player3, "Défenseur central")));
+		
+		Team brazilNationalTeam = new Team("Seleção", "Brazil", "National team", "Casemiro",
+								Arrays.asList(  new PlayerTeam(player3, "Défenseur central"),
+												new PlayerTeam(player4, "Milieu défensif"),
+												new PlayerTeam(player1, "Ailier gauche")));
+		
+		Team argNationalTeam = new Team("La Albiceleste", "Argentina", "National team", "Lionel Messi",
+								Arrays.asList(  new PlayerTeam(player2, "Ailier droit"),
+												new PlayerTeam(player5, "Ailier droit")));
+		
+		/*Team psg = new Team("Paris Saint Germain", "Fance", "Club", "Marquinhos",
 								new PlayerTeam(player1, "Ailier gauche"),
 								new PlayerTeam(player2, "Ailier droit"),
 								new PlayerTeam(player3, "Défenseur central"));
@@ -38,16 +52,16 @@ public class LoadDatabases {
 		
 		Team argNationalTeam = new Team("La Albiceleste", "Argentina", "National team", "Lionel Messi",
 											new PlayerTeam(player2, "Ailier droit"),
-											new PlayerTeam(player5, "Ailier droit"));
+											new PlayerTeam(player5, "Ailier droit"));*/
 		
 		;
 		
 		return args -> {
-			//log.info("Preloading " + playerRepository.saveAll(Arrays.asList(player1, player2, player3, player4, player5)));
+			log.info("Preloading " + playerRepository.saveAll(Arrays.asList(player1, player2, player3, player4, player5)));
 			log.info("Preloading " + teamRepository.save(psg));
 			log.info("Preloading " + teamRepository.save(brazilNationalTeam));
 			log.info("Preloading " + teamRepository.save(argNationalTeam));
-			log.info("Preloading " + playerRepository.saveAll(Arrays.asList(player1, player2, player3, player4, player5)));
+			//log.info("Preloading " + playerRepository.saveAll(Arrays.asList(player1, player2, player3, player4, player5)));
 
 		};
 	}
