@@ -47,7 +47,7 @@ public class TeamServiceImpl implements TeamService {
 			for(PlayerTeam player : team.getPlayers()) {
 				Player player_ = player.getPlayer();
 				Player newPlayer = new Player(player_.getName(), player_.getAge(), player_.getCitizenship());
-				PlayerTeam newPlayerteam = new PlayerTeam(newPlayer, player.getPostion());
+				PlayerTeam newPlayerteam = new PlayerTeam(newPlayer, player.getPosition());
 				newPlayers.add(newPlayerteam);
 				this.playerRepository.save(newPlayer);
 			}

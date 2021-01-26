@@ -68,7 +68,7 @@ public class TeamControllerTest {
 			    .andExpect(jsonPath("$.players[0].player.name", is("Neymar Jr")))
 			    .andExpect(jsonPath("$.players[0].player.age", is(28)))
 			    .andExpect(jsonPath("$.players[0].player.citizenship", is("Brazillian")))
-			    .andExpect(jsonPath("$.players[0].postion", is("Ailier gauche")));
+			    .andExpect(jsonPath("$.players[0].position", is("Ailier gauche")));
 	}
 	
 	@Test
@@ -90,7 +90,7 @@ public class TeamControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.players").isArray())
 			    .andExpect(jsonPath("$.players[0].player.name", is("Marquinhos")))
-			    .andExpect(jsonPath("$.players[0].postion", is("Défenseur central")));
+			    .andExpect(jsonPath("$.players[0].position", is("Défenseur central")));
         
         assertEquals(3, teamRepository.count());
 		

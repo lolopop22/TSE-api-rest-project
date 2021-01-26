@@ -34,7 +34,7 @@ public class PlayerTeam {
 	@JsonIgnoreProperties("players")
 	Team team;
 	
-	String postion;
+	String position;
 	
 	PlayerTeam(){
 
@@ -42,7 +42,7 @@ public class PlayerTeam {
 	
 	public PlayerTeam(Player player, String position){
 		player.addTeam(this);
-		this.postion = position;
+		this.position = position;
 	}
 	
 }
