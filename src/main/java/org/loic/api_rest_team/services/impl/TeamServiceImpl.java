@@ -61,7 +61,12 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public void deleteTeam(Long id) {
 		
-		this.teamRepository.deleteById(id);
+		boolean isExistBeforeDelete = this.teamRepository.findById(id).isPresent();
+		
+		if(isExistBeforeDelete) {
+			this.teamRepository.deleteById(id);
+		}
+		
 	}
 
 	@Override

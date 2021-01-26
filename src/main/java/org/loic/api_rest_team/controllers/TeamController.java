@@ -1,13 +1,7 @@
 package org.loic.api_rest_team.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.engine.transaction.jta.platform.internal.SapNetWeaverJtaPlatform;
-import org.loic.api_rest_team.dao.PlayerRepository;
-import org.loic.api_rest_team.dao.TeamRepository;
-import org.loic.api_rest_team.domains.Player;
-import org.loic.api_rest_team.domains.PlayerTeam;
 import org.loic.api_rest_team.domains.Team;
 import org.loic.api_rest_team.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +18,6 @@ public class TeamController {
 	
 	@Autowired
 	private TeamService teamService;
-	
-	@Autowired
-	private TeamRepository teamRepository;
-	
-	@Autowired
-	private PlayerRepository playerRepository;
 	
 	@GetMapping("/teams")
 	public List<Team> allTeams(){

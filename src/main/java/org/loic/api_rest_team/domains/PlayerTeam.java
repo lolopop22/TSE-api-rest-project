@@ -1,6 +1,5 @@
 package org.loic.api_rest_team.domains;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,24 +20,15 @@ import lombok.Data;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PlayerTeam {
 	
-	/*Ceci constitue ma table d'association*/
-	
-	//@EmbeddedId
-	//PlayerTeamKey id;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	
-	//@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	//@MapsId("playerId")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "player_id")
 	@JsonIgnoreProperties("teams")
 	Player player;
 	
-	//@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	//@MapsId("teamId")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
 	@JsonIgnoreProperties("players")
@@ -51,7 +41,6 @@ public class PlayerTeam {
 	}
 	
 	public PlayerTeam(Player player, String position){
-		//this.player = player;
 		player.addTeam(this);
 		this.postion = position;
 	}
