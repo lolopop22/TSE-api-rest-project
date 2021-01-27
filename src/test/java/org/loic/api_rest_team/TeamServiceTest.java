@@ -37,7 +37,7 @@ public class TeamServiceTest {
 		Assertions.assertEquals("Paris Saint Germain", team.getName());
 		Assertions.assertEquals("France", team.getCountry());
 		Assertions.assertEquals("Club", team.getType());
-		Assertions.assertEquals("Marquinhos", team.getName());
+		Assertions.assertEquals("Marquinhos", team.getCaptain());
 	}
 	
 	@Test 

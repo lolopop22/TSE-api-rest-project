@@ -72,7 +72,32 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public Team saveTeam(Team newTeam, Long id) {
 		
-		return teamRepository.findById(id)
+		Team team = teamRepository.findById(id).orElseThrow(() -> new TeamNotFoundException(id));
+		
+		if(team != null) {
+			team.setName(newTeam.getName());
+			team.setCountry(newTeam.getCountry());
+			team.setType(newTeam.getType());
+			team.setCaptain(newTeam.getCaptain());
+			
+			if(team.getPlayers() != null) {
+				List<PlayerTeam> newPlayers = new ArrayList<>();
+				for(PlayerTeam player : team.getPlayers()) {
+					Player player_ = player.getPlayer();
+					Player newPlayer = new Player(player_.getName(), player_.getAge(), player_.getCitizenship());
+					PlayerTeam newPlayerteam = new PlayerTeam(newPlayer, player.getPosition());
+					newPlayers.add(newPlayerteam);
+					this.playerRepository.save(newPlayer);
+				}
+				team.setPlayers(newPlayers);
+			}
+			return this.teamRepository.save(team);
+		}
+		
+		return team;
+		
+		
+		/*return teamRepository.findById(id)
 				.map(team -> {
 					team.setName(newTeam.getName());
 					team.setCountry(newTeam.getCountry());
@@ -81,7 +106,7 @@ public class TeamServiceImpl implements TeamService {
 					team.setPlayers(newTeam.getPlayers());
 					return this.teamRepository.save(team);
 				})
-				.orElseThrow(() -> new TeamNotFoundException(id));
+				.orElseThrow(() -> new TeamNotFoundException(id));*/
 	}
 
 }

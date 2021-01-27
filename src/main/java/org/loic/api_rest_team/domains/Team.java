@@ -64,9 +64,5 @@ public class Team {
 		for(PlayerTeam player : players) {
 			addPlayer(player);
 		}
-		//this.players = Stream.of(players).collect(Collectors.toSet());
-		System.out.println("In Team.java / domain");
-		System.out.println(this.players);
-		
 	}
 }
