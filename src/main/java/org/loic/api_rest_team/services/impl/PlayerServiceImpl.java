@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.loic.api_rest_team.dao.PlayerRepository;
 import org.loic.api_rest_team.domains.Player;
+import org.loic.api_rest_team.domains.PlayerTeam;
 import org.loic.api_rest_team.exceptions.PlayerNotFoundException;
+import org.loic.api_rest_team.exceptions.TeamNotFoundException;
 import org.loic.api_rest_team.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +42,26 @@ public class PlayerServiceImpl implements PlayerService {
 	@Override
 	public void deletePlayer(Long id) {
 		
-		this.playerRepository.deleteById(id);
+		Player player = this.playerRepository.findById(id).orElseThrow(() -> new TeamNotFoundException(id));
+		
+		//boolean isExistBeforeDelete = this.playerRepository.findById(id).isPresent();
+		
+		if(player != null) {
+			List<PlayerTeam> teams = player.getTeams();
+			System.out.println("teams.size: " + teams.size());
+			if(!teams.isEmpty()) {
+				for(int i=0; i<teams.size(); i++) {
+					player.removeTeam(teams.get(i));
+				}
+			}
+			player = this.playerRepository.save(player);
+			this.playerRepository.deleteById(player.getId());
+		}
+		
+		/*if(isExistBeforeDelete) {
+			player
+			this.playerRepository.deleteById(id);
+		}*/
 	}
 
 	@Override

@@ -40,10 +40,9 @@ public class Team {
 	
 	private String captain;
 	
-	//@OneToMany(cascade = CascadeType.ALL)
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@JsonIgnoreProperties("team")
+	@JsonIgnoreProperties(value = {"team"}, allowSetters = true)
 	@OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
 	private List<PlayerTeam> players = new ArrayList<>();
 		

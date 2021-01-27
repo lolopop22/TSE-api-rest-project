@@ -33,14 +33,12 @@ public class Player {
 	
 	@Column(name = "citizenship")
 	private String citizenship;
-	
-	//@OneToMany(cascade = CascadeType.ALL)
+
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@JsonIgnoreProperties("player")
+	@JsonIgnoreProperties(value = {"player"}, allowSetters = true)
 	@OneToMany(mappedBy = "player")
 	private List<PlayerTeam> teams = new ArrayList<>();
-	//private Set<PlayerTeam> teams = new HashSet<>();
 	
 	public Player(){
 		
@@ -57,5 +55,11 @@ public class Player {
 	public void addTeam(PlayerTeam playerTeam) {
 		this.teams.add(playerTeam);
 		playerTeam.setPlayer(this);
+	}
+	
+	public void removeTeam(PlayerTeam playerTeam) {
+	    this.teams.remove(playerTeam);
+	    playerTeam.setPlayer(null);
+	    playerTeam.setPosition(null);
 	}
 }
