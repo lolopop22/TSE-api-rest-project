@@ -42,7 +42,7 @@ public class PlayerServiceImpl implements PlayerService {
 	@Override
 	public void deletePlayer(Long id) {
 		
-		Player player = this.playerRepository.findById(id).orElseThrow(() -> new TeamNotFoundException(id));
+		Player player = this.playerRepository.findById(id).orElseThrow(() -> new PlayerNotFoundException(id));
 		
 		//boolean isExistBeforeDelete = this.playerRepository.findById(id).isPresent();
 		
